@@ -18,3 +18,22 @@ composer req profiler --dev -> le profiler
 
 composer r annotations -> les annotations
 
+
+
+
+use Symfony\Component\Uid\Uuid;
+
+class User implements UserInterface
+{
+    #[ORM\Id]
+    #[ORM\Column(type: 'uuid', unique: true)]
+    #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+    #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
+    private $id;
+
+    public function getId(): ?Uuid
+    {
+        return $this->id;
+    }
+
+
