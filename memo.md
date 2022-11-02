@@ -6,3 +6,15 @@ symfony serve -> lance le serveur de symfony
 
 php bin/console debug:router -> liste des routes
 
+composer r orm -> installe Doctrine pour les Entités (modifier le .env)
+
+composer r maker -> maker bundle
+
+composer r validator -> valider les formulaires
+
+composer req debug --dev -> debugger
+
+composer req profiler --dev -> le profiler
+
+composer r annotations -> les annotations
+
