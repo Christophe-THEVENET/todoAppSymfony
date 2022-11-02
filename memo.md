@@ -1,6 +1,6 @@
 symfony new ........
 
-php bin/console c:c  -> nettoie le cache
+php bin/console c:c  -> nettoie le cache (si il y a une erreur de syntaxe ca pete)
 
 symfony serve -> lance le serveur de symfony
 
@@ -17,6 +17,8 @@ composer req debug --dev -> debugger
 composer req profiler --dev -> le profiler
 
 composer r annotations -> les annotations
+
+composer r twig -> twig
 
 
 
@@ -36,4 +38,17 @@ class User implements UserInterface
         return $this->id;
     }
 
+
+
+php bin/console doctrine:migrations:status
+
+
+php bin/console doctrine:migrations:diff -> diff entre local est serveur
+
+
+
+bien lire la migration
+
+
+php bin/console doctrine:migrations:migrate
 
