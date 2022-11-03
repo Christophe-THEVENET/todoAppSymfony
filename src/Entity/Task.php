@@ -11,25 +11,25 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
     #[ORM\Column(length: 70)]
-    private ?string $title = null;
+    private string $title;
 
     #[ORM\Column]
-    private ?bool $completed = null;
+    private bool $completed;
 
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Todolist $list = null;
+    private Todolist $list;
 
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -41,7 +41,7 @@ class Task
         return $this;
     }
 
-    public function isCompleted(): ?bool
+    public function isCompleted(): bool
     {
         return $this->completed;
     }
@@ -53,12 +53,12 @@ class Task
         return $this;
     }
 
-    public function getList(): ?Todolist
+    public function getList(): Todolist
     {
         return $this->list;
     }
 
-    public function setList(?Todolist $list): self
+    public function setList(Todolist $list): self
     {
         $this->list = $list;
 

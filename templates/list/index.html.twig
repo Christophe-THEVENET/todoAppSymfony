@@ -10,21 +10,31 @@
   {% for list in allList %}
   <div class="card m-3" style="width: 18rem;">
     <div class="card-body">
+
       <h5 class="card-title" style="color:{{ list.color }}">{{ list.name }}</h5>
+
       <ul>
-       {#  avec le tableau de taches dans l entité list #}
+        {# avec le tableau de taches dans l entité list #}
         {% for task in list.tasks %}
-        <div class="d-flex m-1">
-       {#  si la tache est complété coche  #}
-          <input type="checkbox" {{ task.completed ? "checked" : "" }}>
+        <div class="d-flex m-1 align-items-baseline">
+          {# si la tache est complété coche #} {# si on coche la ckeckbox sa renvoi au controleur mise a jour status tache ( avec onchange) #}
+          <input type="checkbox" {{ task.completed ? "checked" : "" }}
+            onchange="window.location.href='/update-task-status/{{task.id}}'">
           <p class="card-text p-1"> {{task.title}}</p>
+          {# bouton supprimer tache#}
+          <a href="/delete-task/{{task.id}}" class="text-info"><i class="bi bi-x-circle"></i></i></a>
         </div>
         {% endfor %}
+        {# bouton ajouter tache#}
+        <a href="/create-task/{{list.id}}" class="btn btn-info"><i class="bi bi-plus-circle-dotted"></i></a>
       </ul>
+      <div class="d-flex justify-content-end">
+        {# bouton modifier liste#}
+        <a href="/update-list/{{list.id}}" class="btn btn-warning  m-2"><i class="bi bi-pencil-square"></i></a>
+        {# bouton supprimer liste#}
+        <a href="/delete-list/{{list.id}}" class="btn btn-danger  m-2"><i class="bi bi-calendar-x"></i></a>
+      </div>
 
-
-      <a href="/update-list/{{list.id}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-      <a href="/delete-list/{{list.id}}" class="btn btn-danger"><i class="bi bi-calendar-x"></i></a>
     </div>
   </div>
   {% endfor %}
