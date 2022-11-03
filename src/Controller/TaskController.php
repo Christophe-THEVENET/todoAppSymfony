@@ -58,7 +58,7 @@ class TaskController extends AbstractController
     // il faut mettre un href dans l 'input checkbox
     public function updateTaskStatus(TaskRepository $taskRepository, Task $task): Response
     {
-        $task->setCompleted(true);
+        $task->setCompleted(!$task->isCompleted());
         // le repository qui permet de synchroniser les éléments en BDD
         $taskRepository->save($task, true);
 
