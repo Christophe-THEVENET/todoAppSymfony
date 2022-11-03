@@ -72,4 +72,16 @@ class TodolistController extends AbstractController
       "list" => $list
     ]);
   }
+
+
+
+  // =================== SUPPRIMER LISTE =====================
+  #[Route("/delete-list/{id}", name: 'app_delete_list')]
+  public function deleteList(TodolistRepository $todolistRepository, Todolist $list): Response
+  {
+    // le repository qui permet de synchroniser les éléments en BDD
+    $todolistRepository->remove($list, true);
+    
+    return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+  }
 }

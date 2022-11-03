@@ -1,15 +1,9 @@
 {% extends "base.html.twig" %}
 
 
-
-
-
-
-
-
 {% block body %}
 
-<h1>Trello de base</h1>
+<h3 class="text-center my-5">Trello de base</h3>
 
 <div class="container d-flex justify-content-around flex-wrap">
 
@@ -17,10 +11,20 @@
   <div class="card m-3" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title" style="color:{{ list.color }}">{{ list.name }}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-        content.</p>
-      <a href="/update-list/{{list.id}}" class="btn btn-warning">Modifier</a>
-      <a href="#" class="btn btn-danger">Supprimer</a>
+      <ul>
+       {#  avec le tableau de taches dans l entité list #}
+        {% for task in list.tasks %}
+        <div class="d-flex m-1">
+       {#  si la tache est complété coche  #}
+          <input type="checkbox" {{ task.completed ? "checked" : "" }}>
+          <p class="card-text p-1"> {{task.title}}</p>
+        </div>
+        {% endfor %}
+      </ul>
+
+
+      <a href="/update-list/{{list.id}}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+      <a href="/delete-list/{{list.id}}" class="btn btn-danger"><i class="bi bi-calendar-x"></i></a>
     </div>
   </div>
   {% endfor %}
