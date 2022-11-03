@@ -71,9 +71,6 @@ class Todolist
     return $this;
   }
 
-  /**
-   * @return Collection<int, Task>
-   */
   public function getTasks(): Collection
   {
       return $this->tasks;

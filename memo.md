@@ -52,3 +52,4 @@ bien lire la migration
 
 php bin/console doctrine:migrations:migrate
 
+composer r form
