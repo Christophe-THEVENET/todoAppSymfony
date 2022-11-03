@@ -2,14 +2,15 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\TodolistRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert; // pour les contraintes de validation avec validator définies par les attributs (composer r validator) et #[Assert\]
 
 
 
-#[ORM\Entity, ORM\Table(name: "list")]
+#[ORM\Entity(repositoryClass: TodolistRepository::class), ORM\Table(name: "list")]
 class Todolist
 {
 

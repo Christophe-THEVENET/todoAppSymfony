@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+
+{% block body %}
+
+
+{# on verifie la route pour différencier le titre de al page (créer/modifier) #}
+{% if app.request.get("_route") == "app_create_list" %}
+<h3>Créer une liste</h3>
+{% else %}
+<h3>Modifier la liste <span style="color: {{list.color}}">{{list.name}}</span></h3>
+
+{% endif %}
+
+
+
+
+
+<div class="container">
+  {{form_start(formulaire)}}
+  {{form_row(formulaire.name)}}
+  {{form_row(formulaire.color)}}
+
+  {# on verifie la route pour différencier le nom du boutton (créer/modifier) #}
+  {% if app.request.get("_route") == "app_create_list" %}
+  <input type="submit" value="Créer" class="btn btn-success mt-2">
+  {% else %}
+  <input type="submit" value="Modifier" class="btn btn-warning mt-2">
+  {% endif %}
+  {{form_end(formulaire)}}
+</div>
+
+
+
+{% endblock body %}

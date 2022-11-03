@@ -2,7 +2,8 @@ symfony new ........
 
 php bin/console c:c  -> nettoie le cache (si il y a une erreur de syntaxe ca pete)
 
-symfony serve -> lance le serveur de symfony
+symfony serve:start -> lance le serveur de symfony
+symfony serve:stop -> stop le serveur de symfony
 
 php bin/console debug:router -> liste des routes
 
@@ -53,3 +54,11 @@ bien lire la migration
 php bin/console doctrine:migrations:migrate
 
 composer r form
+
+
+ds le twig.yaml (pour charger un theme bootsrap)
+
+apres default
+
+form_themes: ['bootstrap_5_layout.html.twig']
+

@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+
+
+
+
+
+
+
+{% block body %}
+
+<h1>Trello de base</h1>
+
+<div class="container d-flex justify-content-around flex-wrap">
+
+  {% for list in allList %}
+  <div class="card m-3" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title" style="color:{{ list.color }}">{{ list.name }}</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+        content.</p>
+      <a href="/update-list/{{list.id}}" class="btn btn-warning">Modifier</a>
+      <a href="#" class="btn btn-danger">Supprimer</a>
+    </div>
+  </div>
+  {% endfor %}
+
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock body %}
