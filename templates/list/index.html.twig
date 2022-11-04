@@ -16,7 +16,7 @@
       <ul>
         {# avec le tableau de taches dans l entité list #}
         {% for task in list.tasks %}
-        <div class="d-flex m-1 align-items-baseline">
+        <div class="d-flex m-1 align-items-baseline div-task">
           {# si la tache est complété coche #} {# si on coche la ckeckbox sa renvoi au controleur mise a jour status
           tache ( avec onchange) #}
           {# ======= coche la tache 1ere methode avec checkbox =========== #}
@@ -34,9 +34,9 @@
             {% endif %}
 
           </a>
-          <p class="card-text p-1"> {{task.title}}</p>
+          <p class="card-text p-1 text-task"> {{task.title}}</p>
           {# bouton supprimer tache#}
-          <a href="/delete-task/{{task.id}}" class="text-info"><i class="bi bi-x-circle"></i></i></a>
+          <a href="/delete-task/{{task.id}}" class="text-info  delete-task"><i class="bi bi-x-circle"></i></i></a>
         </div>
         {% endfor %}
         {# bouton ajouter tache#}
@@ -57,27 +57,35 @@
 
 {% block javascripts %}
 {# axios pour faire de l asynchrone (inserer son cdn) #}
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+{#
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> #}
 
 <script>
-
-
+// recupere tous les liens a=href pour la checkbox et la suppression des taches
   window.addEventListener('load', event => {
     // qd la page est chargé je récupere tous les lien a contenant icones checkbox
     document.querySelectorAll("a.js-status").forEach(link => {
       // qd on clique sur un des icones récupéré -> updateStatus()
       link.addEventListener('click', updateStatus);
     });
+    // qd la page est chargé je récupere tous les lien de suppresion des taches
+    document.querySelectorAll("a.delete-task").forEach(linkTask => {
+      // qd on clique sur l'icone de suppression de la tache -> deleteTask()
+      linkTask.addEventListener('click', deleteTask);
+    });
   });
 
 
+
+/* ==================== COCHER TACHE EN ASYNCHRONE =========================== */
   function updateStatus(event) {
     // bloque le renvoi sur le lien href au click (pour le faire en asynchrone après)
     event.preventDefault();
     // recupere l icone cliqué (classe identique pour icon coché est vide)
     const checkIcon = this.querySelector('i.icon-check');
     // requete asynchrone (sur l url de la balise a)
-    axios.post(this.href).then(response => {
+    fetch(this.href).then(response => {
       // si la classe de l icon contient ('coché')
       if (checkIcon.classList.contains('bi-check-square-fill')) {
         // remplace ds la classe coché par non coché
@@ -93,18 +101,23 @@
   }
 
 
+/* ==================== SUPPRIMER TACHE EN ASYNCHRONE =========================== */
+  function deleteTask(event) {
+    // bloque le renvoi sur le lien href au click (pour le faire en asynchrone après)
+    event.preventDefault();
+    const deleteTaskButton = this.querySelector('i.bi-x-circle'); // recup le bouton cliqué
+    fetch(this.href).then(response => {
+        let elemParentFirst = deleteTaskButton.parentElement; // recup son 1er parent
+        let elemParentSecond = elemParentFirst.parentElement; // recup son 2eme parent
+       deleteTaskButton.remove(); //supprime tout
+       elemParentFirst.remove();
+       elemParentSecond.remove();
+    }).catch(error => {
+      console.error(error);
+      window.alert('une erreur est survenue')
+    })
+  }
+
 </script>
-
-
-
-
-
 {% endblock %}
-
-
-
-
-
-
-
 {% endblock body %}
